@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Light mode body */
+body {
+  @apply bg-white text-black font-sans;
+}
