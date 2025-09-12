@@ -1,9 +1,13 @@
 // CitationGuide.tsx
 import { useMemo, useState } from "react";
 
+// Reusable constant for other modules (PaperList/App)
+export const plainCitation =
+  "Utama, Rahardhika. 2025. “CORE™ (Collection of Oriented Research and Evidence) for Solving Global Poverty.” Center for Global Poverty at Johns Hopkins University, September 1. https://sites.krieger.jhu.edu/cgp/coreforsgp";
+
 export default function CitationGuide() {
   // ---- Customize these fields as needed ----
-  const authorDisplay = "Rahardhika, Utama."; 
+  const authorDisplay = "Utama, Rahardhika.";
   const year = "2025";
   const titleText =
     "CORE™ (Collection of Oriented Research and Evidence) for Solving Global Poverty.";
@@ -12,14 +16,14 @@ export default function CitationGuide() {
   const url = "https://sites.krieger.jhu.edu/cgp/coreforsgp";
   // ------------------------------------------
 
-  const plainCitation = useMemo(
+  // Avoid shadowing the exported const
+  const computedCitation = useMemo(
     () =>
       `${authorDisplay} ${year}. “CORE™ (Collection of Oriented Research and Evidence) for Solving Global Poverty.” ${publisher}, ${dateText}. ${url}`,
     [authorDisplay, year, publisher, dateText, url]
   );
 
   const bibtex = useMemo(() => {
-    // Create a simple BibTeX key
     const key = "core_sgp_2025";
     return `@misc{${key},
   author    = {${authorDisplay.replace(/\.$/, "")}},
@@ -54,8 +58,8 @@ ER  - `,
             issued: { "date-parts": [[2025, 9, 1]] },
             title: titleText,
             publisher,
-            URL: url
-          }
+            URL: url,
+          },
         ],
         null,
         2
@@ -86,12 +90,14 @@ ER  - `,
     URL.revokeObjectURL(link.href);
   };
 
-  const encodedText = encodeURIComponent(plainCitation);
-  const encodedUrl = encodeURIComponent(url);
+  const encodedText = encodeURIComponent(computedCitation);
+
+  // Share homepage (HashRouter root)
+  const homepageUrl = `${window.location.origin}${window.location.pathname}`;
+  const encodedHomeUrl = encodeURIComponent(homepageUrl);
+
   const tweetUrl = `https://twitter.com/intent/tweet?text=${encodedText}`;
   const waUrl = `https://wa.me/?text=${encodedText}`;
-  const liUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
-  const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
   const mailtoUrl = `mailto:?subject=${encodeURIComponent(
     "Citation: CORE for Solving Global Poverty"
   )}&body=${encodedText}`;
@@ -101,8 +107,8 @@ ER  - `,
       try {
         await navigator.share({
           title: "Citation: CORE for Solving Global Poverty",
-          text: plainCitation,
-          url
+          text: computedCitation,
+          url: homepageUrl, // share homepage here as well
         });
       } catch {
         // user canceled or unsupported action
@@ -118,7 +124,6 @@ ER  - `,
 
       <div className="rounded-xl border border-gray-200 p-4 mb-4 bg-white shadow-sm">
         <p className="leading-relaxed">
-          {/* Render ™ as superscript in the display text */}
           <span className="font-medium">{authorDisplay}</span> {year}. “CORE
           <sup>TM</sup> (Collection of Oriented Research and Evidence) for
           Solving Global Poverty.” {publisher}, {dateText}.{" "}
@@ -135,7 +140,7 @@ ER  - `,
 
       <div className="flex flex-wrap gap-2 mb-6">
         <button
-          onClick={() => copyToClipboard(plainCitation, "citation")}
+          onClick={() => copyToClipboard(computedCitation, "citation")}
           className="px-3 py-2 rounded-lg bg-gray-900 text-white hover:bg-black"
         >
           {copied === "citation" ? "Copied!" : "Copy citation"}
@@ -147,7 +152,9 @@ ER  - `,
           Download BibTeX
         </button>
         <button
-          onClick={() => download("core_citation.ris", ris, "application/x-research-info-systems")}
+          onClick={() =>
+            download("core_citation.ris", ris, "application/x-research-info-systems")
+          }
           className="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200"
         >
           Download RIS
@@ -163,54 +170,24 @@ ER  - `,
       </div>
 
       <h2 className="text-xl font-semibold mb-2">Share</h2>
-      <p className="text-gray-700 mb-3">
-        Share the citation via social or email.
-      </p>
+      <p className="text-gray-700 mb-3">Share the citation via social or email.</p>
 
       <div className="flex flex-wrap gap-2">
-        <a
-          href={mailtoUrl}
-          className="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200"
-        >
+        <a href={mailtoUrl} className="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200">
           Email
         </a>
-        <a
-          href={waUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200"
-        >
+        <a href={waUrl} target="_blank" rel="noreferrer" className="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200">
           WhatsApp
         </a>
-        <a
-          href={tweetUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200"
-        >
+        <a href={tweetUrl} target="_blank" rel="noreferrer" className="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200">
           X (Twitter)
         </a>
-        <a
-          href={liUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200"
-        >
-          LinkedIn
-        </a>
-        <a
-          href={fbUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200"
-        >
-          Facebook
-        </a>
         
+
         <button
           onClick={webShare}
           className="px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200"
-          title="Uses your device's native share sheet if available"
+          title="Uses device's native share sheet if available"
         >
           Share via device
         </button>
@@ -219,11 +196,9 @@ ER  - `,
       <hr className="my-6" />
 
       <details className="mb-2">
-        <summary className="cursor-pointer font-semibold">
-          Plain text citation
-        </summary>
+        <summary className="cursor-pointer font-semibold">Plain text citation</summary>
         <pre className="mt-2 whitespace-pre-wrap text-sm bg-gray-50 p-3 rounded-lg border border-gray-200">
-{plainCitation}
+{computedCitation}
         </pre>
       </details>
 

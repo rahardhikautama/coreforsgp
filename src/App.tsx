@@ -4,12 +4,16 @@ import Papa from 'papaparse';
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import PaperList from './components/PaperList';
-import Pagination from './components/Pagination'; 
+import Pagination from './components/Pagination';
 
 import About from './pages/About';
 import Documentation from './pages/Documentation';
 import Resources from './pages/Resources';
-import CitationGuide from "./pages/CitationGuide";
+import CitationGuide from './pages/CitationGuide';
+import Contribute from './pages/Contribute';
+
+import { useAnalytics } from "./useAnalytics";
+
 
 export type Paper = {
   Title: string;
@@ -25,6 +29,11 @@ export type Paper = {
   primary_category: string;
   Keywords: string;
 };
+
+function AnalyticsTracker() {
+  useAnalytics('G-G7DSW8Y406');
+  return null;
+}
 
 function App() {
   const [papers, setPapers] = useState<Paper[]>([]);
@@ -75,6 +84,44 @@ function App() {
       error: (error: any) => console.error('CSV load error:', error),
     });
   }, []);
+
+  // Helpers to sync filters with the hash query (HashRouter)
+  const readParams = () => {
+    const hash = window.location.hash || '';
+    const qs = hash.includes('?') ? hash.split('?')[1] : '';
+    const sp = new URLSearchParams(qs);
+    return {
+      q: sp.get('q') ?? '',
+      cat: sp.get('cat') ?? '',
+      sort: sp.get('sort') as 'relevance' | 'year' | 'citations' | null,
+    };
+  };
+
+  const writeParams = (params: { q?: string; cat?: string; sort?: 'relevance' | 'year' | 'citations' }) => {
+    const base = `${window.location.origin}${window.location.pathname}#/`;
+    const sp = new URLSearchParams();
+    if (params.q) sp.set('q', params.q);
+    if (params.cat) sp.set('cat', params.cat);
+    if (params.sort) sp.set('sort', params.sort);
+    const url = `${base}${sp.toString() ? `?${sp.toString()}` : ''}`;
+    // replaceState avoids history spam; use pushState if back/forward steps per change are desired
+    history.replaceState(null, '', url);
+  };
+
+  // Initialize filters from URL once on mount
+  useEffect(() => {
+    const { q, cat, sort } = readParams();
+    if (q) setQuery(q);
+    if (cat) setCategoryFilter(cat);
+    if (sort === 'relevance' || sort === 'year' || sort === 'citations') setSortBy(sort);
+    // do not add deps; run once
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Reflect filter changes back into the URL (keeps homepage links shareable)
+  useEffect(() => {
+    writeParams({ q: query || undefined, cat: categoryFilter || undefined, sort: sortBy });
+  }, [query, categoryFilter, sortBy]);
 
   // unique categories for filter
   const uniqueCategories = useMemo(() => {
@@ -144,6 +191,7 @@ function App() {
       { to: '/documentation', label: 'Documentation' },
       { to: '/resources', label: 'Resources' },
       { to: '/citation', label: 'Citation Guide' },
+      { to: '/contribute', label: 'Contribute' },
     ];
 
     const LinkList = ({ className = '' }: { className?: string }) => (
@@ -251,7 +299,6 @@ function App() {
         </select>
       </div>
 
-      
       {/* CURRENT PAGE ITEMS */}
       <PaperList papers={pageItems} setCategoryFilter={setCategoryFilter} />
 
@@ -312,6 +359,7 @@ function App() {
                   <Route path="/documentation" element={<Documentation />} />
                   <Route path="/resources" element={<Resources />} />
                   <Route path="/citation" element={<CitationGuide />} />
+                  <Route path="/contribute" element={<Contribute />} />
                 </Routes>
               </div>
             </div>
