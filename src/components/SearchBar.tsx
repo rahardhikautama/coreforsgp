@@ -10,7 +10,7 @@ const SearchBar = ({ query, setQuery }: Props) => {
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search by title, author, category, or policy..."
+        placeholder="Search by title, author, keyword, or policy area..."
         className="w-full border border-brandBlue rounded-md p-3 text-sm shadow-sm focus:ring-brandBlue focus:border-brandBlue"
       />
     </div>
