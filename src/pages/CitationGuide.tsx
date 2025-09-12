@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 
 export default function CitationGuide() {
   // ---- Customize these fields as needed ----
-  const authorDisplay = "Rahardhika, Utama."; 
+  const authorDisplay = "Utama, Rahardhika."; 
   const year = "2025";
   const titleText =
     "CORE™ (Collection of Oriented Research and Evidence) for Solving Global Poverty.";
