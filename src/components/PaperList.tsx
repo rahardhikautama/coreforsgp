@@ -98,8 +98,8 @@ Citations: ${paper.CitationCount}
               <span>Year: {paper.Year}</span>
               <span className="px-2">·</span>
               {
-                categories.map((category => {
-                  return <span style={{cursor: 'pointer'}} onClick={() => setCategoryFilter(category)}>{category}; </span>
+                categories.map(((category, i) => {
+                  return <span style={{cursor: 'pointer'}} onClick={() => setCategoryFilter(category)}>{category}{i < categories.length - 1  ? ';' : ''} </span>
                 }))
               }
               
