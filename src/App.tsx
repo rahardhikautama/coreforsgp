@@ -284,13 +284,18 @@ function App() {
           <button
             type="button"
             onClick={() => setIsSidebarOpen(true)}
-            className="inline-flex items-center gap-2 rounded-md border border-brandBlue px-3 py-2 text-sm bg-white text-black"
+            className="inline-flex items-center gap-2 rounded-md border border-black px-3 py-2 text-sm bg-white text-black"
             aria-controls="mobile-sidebar"
             aria-expanded={isSidebarOpen}
             aria-label="Open navigation"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M3 6h18M3 12h18M3 18h18" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="black"
+            >
+              <path d="M3 6h18M3 12h18M3 18h18" stroke="black" />
             </svg>
             Menu
           </button>
