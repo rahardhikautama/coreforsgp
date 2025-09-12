@@ -5,7 +5,7 @@ export default function About() {
 
       <p>
         CORE™ (Collection of Oriented Research and Evidence) is a policy
-        summarization initiative that translates scientific articles into
+        summarization initiative that translates academic articles into
         accessible insights for policymakers, industry leaders, and scientists.
         Founded and developed by{' '}
         <a
