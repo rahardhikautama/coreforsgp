@@ -42,7 +42,7 @@ function App() {
   const [query, setQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
   const [yearFilter, setYearFilter] = useState(0);
-  const [sortBy, setSortBy] = useState<'relevance' | 'year' | 'citations'>('relevance');
+  const [sortBy, setSortBy] = useState<'relevance' | 'year' | 'citations'>('year');
 
   // pagination
   const [page, setPage] = useState<number>(1);
