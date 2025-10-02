@@ -39,7 +39,6 @@ function App() {
   const [papers, setPapers] = useState<Paper[]>([]);
 
   // controls
-  const [query, setQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
   const [yearFilter, setYearFilter] = useState(0);
   const [sortBy, setSortBy] = useState<'relevance' | 'year' | 'citations'>('year');
@@ -108,21 +107,6 @@ function App() {
     history.replaceState(null, '', url);
   };
 
-  // Initialize filters from URL once on mount
-  useEffect(() => {
-    const { q, cat, sort } = readParams();
-    if (q) setQuery(q);
-    if (cat) setCategoryFilter(cat);
-    if (sort === 'relevance' || sort === 'year' || sort === 'citations') setSortBy(sort);
-    // do not add deps; run once
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Reflect filter changes back into the URL (keeps homepage links shareable)
-  useEffect(() => {
-    writeParams({ q: query || undefined, cat: categoryFilter || undefined, sort: sortBy });
-  }, [query, categoryFilter, sortBy]);
-
   // unique categories for filter
   const uniqueCategories = useMemo(() => {
     return Array.from(
@@ -137,51 +121,6 @@ function App() {
       .filter(Boolean)
       .sort();
   }, [papers]);
-
-  // FILTER
-  const filtered = useMemo(() => {
-    const lowerQ = query.trim().toLowerCase();
-    return papers.filter((p) => {
-      const matchesQ =
-        !lowerQ ||
-        [p.Title, p.Authors, p.Why_it_matters_for_policy, p.primary_category, p.Keywords, p.Abstract]
-          .filter(Boolean)
-          .join(' ')
-          .toLowerCase()
-          .includes(lowerQ);
-
-      const cats = (p.primary_category || '')
-        .split(/;|,|\uFF1B/)
-        .map((s: string) => s.replace(/\s+/g, ' ').trim())
-        .filter(Boolean);
-      const matchesCat = !categoryFilter || cats.includes(categoryFilter);
-
-      const matchesYear = !yearFilter || p.Year >= yearFilter;
-
-      return matchesQ && matchesCat && matchesYear;
-    });
-  }, [papers, query, categoryFilter, yearFilter]);
-
-  // SORT
-  const sorted = useMemo(() => {
-    const arr = [...filtered];
-    if (sortBy === 'year') {
-      arr.sort((a, b) => b.Year - a.Year);
-    } else if (sortBy === 'citations') {
-      arr.sort((a, b) => b.CitationCount - a.CitationCount);
-    } // 'relevance' keeps current order
-    return arr;
-  }, [filtered, sortBy]);
-
-  // reset to page 1 whenever criteria change
-  useEffect(() => {
-    setPage(1);
-  }, [query, categoryFilter, yearFilter, sortBy, pageSize]);
-
-  // PAGINATE
-  const total = sorted.length;
-  const start = (page - 1) * pageSize;
-  const pageItems = sorted.slice(start, start + pageSize);
 
   // Sidebar with desktop and mobile variants
   const Sidebar = ({ onNavigate }: { onNavigate?: () => void }) => {
@@ -257,8 +196,74 @@ function App() {
       </>
     );
   };
+const Home = useMemo(
+  () => () => {
+  const [query, setQuery] = useState('');
 
-  const Home = () => (
+  // Initialize filters from URL once on mount
+  useEffect(() => {
+    const { q, cat, sort } = readParams();
+    if (q) setQuery(q);
+    if (cat) setCategoryFilter(cat);
+    if (sort === 'relevance' || sort === 'year' || sort === 'citations') setSortBy(sort);
+    // do not add deps; run once
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Reflect filter changes back into the URL (keeps homepage links shareable)
+  useEffect(() => {
+    writeParams({ q: query || undefined, cat: categoryFilter || undefined, sort: sortBy });
+  }, [query, categoryFilter, sortBy]);
+
+
+  // FILTER
+  const filtered = useMemo(() => {
+    const lowerQ = query.trim().toLowerCase();
+    return papers.filter((p) => {
+      const matchesQ =
+        !lowerQ ||
+        [p.Title, p.Authors, p.Why_it_matters_for_policy, p.primary_category, p.Keywords, p.Abstract]
+          .filter(Boolean)
+          .join(' ')
+          .toLowerCase()
+          .includes(lowerQ);
+
+      const cats = (p.primary_category || '')
+        .split(/;|,|\uFF1B/)
+        .map((s: string) => s.replace(/\s+/g, ' ').trim())
+        .filter(Boolean);
+      const matchesCat = !categoryFilter || cats.includes(categoryFilter);
+
+      const matchesYear = !yearFilter || p.Year >= yearFilter;
+
+      return matchesQ && matchesCat && matchesYear;
+    });
+  }, [papers, query, categoryFilter, yearFilter]);
+
+
+  // SORT
+  const sorted = useMemo(() => {
+    const arr = [...filtered];
+    if (sortBy === 'year') {
+      arr.sort((a, b) => b.Year - a.Year);
+    } else if (sortBy === 'citations') {
+      arr.sort((a, b) => b.CitationCount - a.CitationCount);
+    } // 'relevance' keeps current order
+    return arr;
+  }, [filtered, sortBy]);
+
+
+  // reset to page 1 whenever criteria change
+  useEffect(() => {
+    setPage(1);
+  }, [query, categoryFilter, yearFilter, sortBy, pageSize]);
+
+  // PAGINATE
+  const total = sorted.length;
+  const start = (page - 1) * pageSize;
+  const pageItems = sorted.slice(start, start + pageSize);
+
+    return (
     <div className="space-y-6">
       <SearchBar query={query} setQuery={setQuery} />
 
@@ -271,7 +276,9 @@ function App() {
         >
           <option value="">All Categories</option>
           {uniqueCategories.map((cat) => (
-            <option key={cat} value={cat}>{cat}</option>
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
           ))}
         </select>
 
@@ -319,7 +326,22 @@ function App() {
         </div>
       </div>
     </div>
-  );
+  )},
+  [
+    categoryFilter,
+    setCategoryFilter,
+    yearFilter,
+    setYearFilter,
+    sortBy,
+    setSortBy,
+    uniqueCategories,
+    page,
+    setPage,
+    pageSize,
+    setPageSize,
+  ]
+);
+
 
   return (
     <Router>
