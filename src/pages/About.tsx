@@ -74,6 +74,11 @@ export default function About() {
         </li>
       </ul>
 
+
+
+    <h3 className="text-xl font-semibold mt-6">Disclaimer</h3>
+      <p>The summaries in this collection are created using a combination of human review and large language model (LLM) technology trained on metadata from published articles and policy-focused documents. While this process helps make research more accessible to all users, the accuracy and consistency of the summaries may vary. Users should view them as interpretive aids rather than definitive accounts and are strongly encouraged to consult the linked original articles for complete details, data, and context.</p>
+
       <h3 className="text-xl font-semibold mt-6">Acknowledgments</h3>
       <ul className="list-disc pl-5 space-y-2">
         <li>
