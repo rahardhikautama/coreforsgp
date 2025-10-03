@@ -83,7 +83,7 @@ ${coreCitation}
   };
 
   return (
-    <div className="px-4 py-6 space-y-6">
+    <div className="w-full max-w-4xl mx-auto space-y-6">
       {papers.map((paper, index) => {
         const links = shareTargets(paper);
         const categories = (paper.primary_category || '').split('; ').filter(Boolean);
@@ -147,7 +147,7 @@ ${coreCitation}
             <div className="mt-4 flex gap-2">
               <button
                 onClick={() => handleCopy(paper, index)}
-                className="px-3 py-1.5 rounded-md bg-gray-900 text-white text-sm hover:bg-black"
+                className="px-3 py-1.5 rounded-md bg-[#002D72] text-white text-sm hover:bg-[#002D72]"
               >
                 {copiedIndex === index ? 'Copied!' : 'Copy'}
               </button>

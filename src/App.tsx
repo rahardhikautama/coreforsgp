@@ -38,7 +38,7 @@ function App() {
   // filters
   const [categoryFilter, setCategoryFilter] = useState('');
   const [yearFilter, setYearFilter] = useState(0);
-  const [sortBy, setSortBy] = useState<'relevance' | 'year' | 'citations'>('year');
+  const [sortBy, setSortBy] = useState<'relevance' | 'year' | 'citations'>('relevance');
 
   // pagination
   const [page, setPage] = useState<number>(1);

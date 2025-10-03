@@ -141,7 +141,7 @@ ER  - `,
       <div className="flex flex-wrap gap-2 mb-6">
         <button
           onClick={() => copyToClipboard(computedCitation, "citation")}
-          className="px-3 py-2 rounded-lg bg-gray-900 text-white hover:bg-black"
+          className="px-3 py-2 rounded-lg bg-[#002D72] text-white hover:bg-[#002D72]"
         >
           {copied === "citation" ? "Copied!" : "Copy citation"}
         </button>
