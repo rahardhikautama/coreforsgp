@@ -11,6 +11,13 @@ import Contribute from './pages/Contribute';
 import Home from './pages/Home';
 
 import { useAnalytics } from "./useAnalytics";
+import { initAnalytics } from "./initAnalytics";
+
+
+function AnalyticsTracker() {
+  useAnalytics('G-G7DSW8Y406');
+  return null;
+}
 
 export type Paper = {
   Title: string;
@@ -27,12 +34,13 @@ export type Paper = {
   Keywords: string;
 };
 
-function AnalyticsTracker() {
-  useAnalytics('G-G7DSW8Y406');
-  return null;
-}
 
 function App() {
+  // Initialize Google Analytics once on mount
+  useEffect(() => {
+    initAnalytics("G-G7DSW8Y406");
+  }, []);
+  
   const [papers, setPapers] = useState<Paper[]>([]);
 
   // filters
@@ -174,6 +182,7 @@ function App() {
 
   return (
     <Router>
+      <AnalyticsTracker /> {/* Tracks route changes via useAnalytics */}
       <div className="min-h-screen bg-white text-black">
         <Header />
 
