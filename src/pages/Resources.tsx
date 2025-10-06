@@ -25,7 +25,7 @@ export default function Resources() {
             target="_blank"
             rel="noreferrer"
           >
-            Johns Hopkins Center for Global Poverty
+            Johns Hopkins Center on Global Poverty
           </a>
           <p>
             Supports research using qualitative methods to address complex

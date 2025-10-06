@@ -91,7 +91,7 @@ export default function About() {
             Dr. Monica Prasad
           </a>{' '}
           for substantive input and for agreeing to host this collection at the
-          JHU Center for Global Poverty.
+          JHU Center on Global Poverty.
         </li>
         <li>
           <a
