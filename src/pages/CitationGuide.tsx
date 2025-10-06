@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 
 // Reusable constant for other modules (PaperList/App)
 export const plainCitation =
-  "Utama, Rahardhika. 2025. “CORE™ (Collection of Oriented Research and Evidence) for Solving Global Poverty.” Center for Global Poverty at Johns Hopkins University, September 1. https://sites.krieger.jhu.edu/cgp/coreforsgp";
+  "Utama, Rahardhika. 2025. “CORE™ (Collection of Oriented Research and Evidence) for Solving Global Poverty.” Center on Global Poverty at Johns Hopkins University, September 1. https://www.coreforsgp.com/";
 
 export default function CitationGuide() {
   // ---- Customize these fields as needed ----
@@ -11,7 +11,7 @@ export default function CitationGuide() {
   const year = "2025";
   const titleText =
     "CORE™ (Collection of Oriented Research and Evidence) for Solving Global Poverty.";
-  const publisher = "Center for Global Poverty at Johns Hopkins University";
+  const publisher = "Center on Global Poverty at Johns Hopkins University";
   const dateText = "September 1";
   const url = "https://www.coreforsgp.com/";
   // ------------------------------------------
