@@ -13,7 +13,7 @@ export default function CitationGuide() {
     "CORE™ (Collection of Oriented Research and Evidence) for Solving Global Poverty.";
   const publisher = "Center for Global Poverty at Johns Hopkins University";
   const dateText = "September 1";
-  const url = "https://sites.krieger.jhu.edu/cgp/coreforsgp";
+  const url = "https://www.coreforsgp.com/";
   // ------------------------------------------
 
   // Avoid shadowing the exported const
