@@ -40,7 +40,7 @@ function App() {
   useEffect(() => {
     initAnalytics("G-G7DSW8Y406");
   }, []);
-  
+
   const [papers, setPapers] = useState<Paper[]>([]);
 
   // filters
@@ -114,6 +114,7 @@ function App() {
       { to: '/resources', label: 'Resources' },
       { to: '/citation', label: 'Citation Guide' },
       { to: '/contribute', label: 'Contribute' },
+      { to: 'https://sites.krieger.jhu.edu/cgp/', label: 'Center on Global Poverty', external: true },
     ];
 
     const LinkList = ({ className = '' }: { className?: string }) => (
