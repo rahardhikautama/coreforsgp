@@ -1,3 +1,5 @@
+import jhuLogo from '../assets/jhu_logo_blue.png';
+
 export default function About() {
   return (
     <div className="max-w-3xl space-y-4">
@@ -74,10 +76,53 @@ export default function About() {
         </li>
       </ul>
 
+      <h3 className="text-xl font-semibold mt-6">Support and Collaboration</h3>
+
+        <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 mt-2">
+          {/* JHU Logo */}
+          <a
+            href="https://sites.krieger.jhu.edu/cgp/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-shrink-0"
+          >
+            <img
+              src={jhuLogo}
+              alt="Johns Hopkins University Logo"
+              className="h-28 sm:h-40 w-auto object-contain"
+            />
+          </a>
+
+          {/* Paragraph text */}
+          <p className="text-justify">
+            CORE™ is supported by the{' '}
+            <a
+              href="https://sites.krieger.jhu.edu/cgp/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brandBlue underline font-semibold"
+            >
+              Center on Global Poverty
+            </a>{' '}
+            at Johns Hopkins University. This collaboration reflects a shared
+            commitment to bridging the divide between academic research and
+            real-world policy applications in the global effort to alleviate
+            poverty.
+          </p>
+        </div>
 
 
-    <h3 className="text-xl font-semibold mt-6">Disclaimer</h3>
-      <p>The summaries in this collection are created using a combination of human review and large language model (LLM) technology trained on metadata from published articles and policy-focused documents. While this process helps make research more accessible to all users, the accuracy and consistency of the summaries may vary. Users should view them as interpretive aids rather than definitive accounts and are strongly encouraged to consult the linked original articles for complete details, data, and context.</p>
+      <h3 className="text-xl font-semibold mt-6">Disclaimer</h3>
+      <p>
+        The summaries in this collection are created using a combination of
+        human review and large language model (LLM) technology trained on
+        metadata from published articles and policy-focused documents. While
+        this process helps make research more accessible to all users, the
+        accuracy and consistency of the summaries may vary. Users should view
+        them as interpretive aids rather than definitive accounts and are
+        strongly encouraged to consult the linked original articles for complete
+        details, data, and context.
+      </p>
 
       <h3 className="text-xl font-semibold mt-6">Acknowledgments</h3>
       <ul className="list-disc pl-5 space-y-2">
@@ -90,8 +135,7 @@ export default function About() {
           >
             Dr. Monica Prasad
           </a>{' '}
-          for substantive input and for agreeing to host this collection at the
-          JHU Center on Global Poverty.
+          for substantive input and for facilitating the Center on Global Poverty’s support of this collection.
         </li>
         <li>
           <a

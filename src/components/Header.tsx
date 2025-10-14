@@ -15,11 +15,14 @@ const Header = () => {
               alt="CORE Logo"
               className="max-h-16.5 max-w-[180px] w-auto object-contain"
             />
+            {/* Temporarily hide JHU logo */}
+            {/*
             <img
               src={jhuLogo}
               alt="JHU Logo"
               className="max-h-16.5 max-w-[180px] w-auto object-contain"
             />
+            */}
           </div>
           {/* Title */}
           <div className="text-center">
@@ -51,12 +54,14 @@ const Header = () => {
             </p>
           </div>
 
-          {/* Right logo */}
+          {/* Temporarily hide JHU logo */}
+          {/*
           <img
             src={jhuLogo}
             alt="JHU Logo"
             className="max-h-21 max-w-[180px] w-auto object-contain"
           />
+          */}
         </div>
 
       </div>
