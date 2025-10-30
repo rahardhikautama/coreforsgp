@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 
 // Reusable constant for other modules (PaperList/App)
 export const plainCitation =
-  "Utama, Rahardhika. 2025. “CORE™ (Collection of Oriented Research and Evidence) for Solving Global Poverty.” Center on Global Poverty at Johns Hopkins University, September 1. https://www.coreforsgp.com/";
+  "Utama, Rahardhika. 2025. “CORE™ (Collection of Oriented Research and Evidence) for Solving Global Poverty.” Center on Global Poverty at Johns Hopkins University, September 1. https://sites.krieger.jhu.edu/cgp/tools-for-practitioners/";
 
 export default function CitationGuide() {
   // ---- Customize these fields as needed ----
@@ -13,7 +13,7 @@ export default function CitationGuide() {
     "CORE™ (Collection of Oriented Research and Evidence) for Solving Global Poverty.";
   const publisher = "Center on Global Poverty at Johns Hopkins University";
   const dateText = "September 1";
-  const url = "https://www.coreforsgp.com/";
+  const url = "https://sites.krieger.jhu.edu/cgp/tools-for-practitioners/";
   // ------------------------------------------
 
   // Avoid shadowing the exported const
@@ -222,6 +222,15 @@ ER  - `,
 {cslJson}
         </pre>
       </details>
+
+      <hr className="my-6" />
+        <h2 className="text-xl font-semibold mb-2">Authorship and Copyright</h2>
+        <p className="text-gray-700 leading-relaxed">
+          © 2025 Dr. Rahardhika Utama. The CORE™ Framework and related materials are
+          original works protected under U.S. copyright law. Registration pending with
+          the U.S. Copyright Office. All rights reserved.
+        </p>
+
     </div>
   );
 }

@@ -1,7 +1,7 @@
-export default function DataSources() {
+export default function Documentation() {
   return (
     <div className="max-w-3xl">
-      <h2 className="text-2xl font-bold mb-4">Data Sources</h2>
+      <h2 className="text-2xl font-bold mb-4">Documentation</h2>
       <p className="mb-4">
         Peer-reviewed articles are drawn from selected journals that focus on
         poverty, inequality, and development. The collection is updated
@@ -110,6 +110,36 @@ export default function DataSources() {
         <li>sustainable livelihoods</li>
         <li>development inequality</li>
       </ul>
+      <hr className="my-6" />
+
+        <h3 className="text-xl font-semibold mb-2">Use and Attribution Policy</h3>
+        <p className="text-gray-700 leading-relaxed mb-4">
+          The CORE™ (Collection of Oriented Research and Evidence) Framework, including
+          its underlying concepts, structure, and written materials, was developed by
+          Dr. Rahardhika Utama and is protected under U.S. copyright law.
+        </p>
+        <p className="text-gray-700 leading-relaxed mb-4">
+          The framework and related content are shared on this website for educational
+          and research purposes. Visitors are welcome to reference or cite CORE™
+          materials with proper attribution. Reuse or adaptation of the framework, its
+          components, or derivative versions should be undertaken with permission to
+          maintain conceptual integrity and ensure appropriate acknowledgment.
+        </p>
+        <p className="text-gray-700 leading-relaxed">
+          For collaboration or permissions inquiries, please contact the author at{" "}
+          <a
+            href="https://www.rahardhika.com/"
+            target="_blank"
+            rel="noreferrer"
+            className="text-brandBlue underline"
+          >
+            https://www.rahardhika.com/
+          </a>
+          .
+        </p>
+
+
+
     </div>
   );
 }
