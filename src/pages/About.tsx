@@ -24,6 +24,18 @@ export default function About() {
       </p>
 
       <p>
+      The conceptual design and methodology underlying this initiative are formally detailed in the white paper <i>“CORE™ Framework: A System for Translating Academic Research into Policy-Relevant Insights”</i> (2025), available in this {' '}
+            <a
+          href="https://doi.org/10.5281/zenodo.17486704"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-brandBlue underline"
+        >
+          repository.
+        </a>
+      </p>
+
+      <p>
         <strong>CORE™ for Solving Global Poverty</strong> was inspired by
         conversations at the 10th Annual Sociology of Development Conference
         hosted by{' '}
