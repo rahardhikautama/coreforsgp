@@ -65,8 +65,27 @@ function Home({
   const start = (page - 1) * pageSize;
   const pageItems = sorted.slice(start, start + pageSize);
 
+
   return (
+
     <div className="space-y-6">
+    <div className="max-w-4xl mx-auto text-center px-4 mt-2 mb-6">
+    <p className="text-gray-700 text-sm md:text-base leading-relaxed">
+      <strong>CORE™ for Solving Global Poverty</strong> is a curated collection of concise,
+      policy-oriented summaries drawn from peer-reviewed social science research on poverty and
+      development. It helps practitioners, researchers, and policymakers quickly find and apply
+      relevant insights.
+    </p>
+    <p className="mt-3 text-gray-700 text-sm md:text-base leading-relaxed">
+      Use the search bar to explore by keyword, filter results by topic or category, and sort by
+      publication year, relevance, or citation count. 
+      </p>
+    <p className="mt-3 text-gray-700 text-sm md:text-base leading-relaxed">
+      Each summary captures key evidence-based findings and policy insights in under a minute.
+    </p>
+  </div>
+
+    
       <SearchBar query={query} setQuery={setQuery} />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
