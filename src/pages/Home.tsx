@@ -69,7 +69,7 @@ function Home({
   return (
 
     <div className="space-y-6">
-    <div className="max-w-4xl mx-auto text-center px-4 mt-2 mb-6">
+    <div className="max-w-4xl mx-auto px-4 mt-2 mb-6">
     <p className="text-gray-700 text-sm md:text-base leading-relaxed">
       <strong>CORE™ for Solving Global Poverty</strong> is a curated collection of concise,
       policy-oriented summaries drawn from peer-reviewed social science research on poverty and
