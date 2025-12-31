@@ -136,6 +136,22 @@ export default function About() {
         details, data, and context.
       </p>
 
+
+      <h3 className="text-xl font-semibold mt-6">Press Release</h3>
+
+      <p>
+        For media and institutional use, a formal press release describing the
+        CORE™ initiative is available for download{' '}
+        <a
+          href="/data/CORE_Press Release_2025.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-brandBlue underline"
+        >
+          <strong>here (PDF)</strong>
+        </a>.
+      </p>
+
       <h3 className="text-xl font-semibold mt-6">Acknowledgments</h3>
       <ul className="list-disc pl-5 space-y-2">
         <li>
